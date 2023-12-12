@@ -1,4 +1,4 @@
-package com.music961.millie_task.di
+package com.music961.millie_task.core.di
 
 import com.music961.millie_task.repo.RepoNews
 import com.music961.millie_task.repo.dummy.RepoNewsDummy

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.music961.millie_task.compose.theme.MillieTheme
 import com.music961.millie_task.compose.util.MillieScaffold
+import com.music961.millie_task.core.enum.MillieDp
 import com.music961.millie_task.viewModel.VmNews
 
 @Composable
@@ -36,11 +38,14 @@ fun UIMain() {
     val columns = if (isWideScreen) 3 else 1
 
     LaunchedEffect(Unit){
+        // 231213 Andy : Bringing in the news
         vmNews.refreshListNews()
     }
 
     MillieScaffold(
-        Modifier.fillMaxSize()
+        Modifier
+            .fillMaxSize()
+            .padding(MillieDp.ScaffoldPadding.dp)
     ) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(columns)
@@ -49,8 +54,9 @@ fun UIMain() {
                 Column(
                     Modifier
                         .fillMaxWidth()
-                        .height(56.dp)
+                        // 231213 Andy : random color
                         .background(Color((0..Int.MAX_VALUE).random()))
+                        .padding(MillieDp.ItemPadding.dp)
                 ) {
                     Text(text = it.title)
                     Text(text = it.urlToImage)
