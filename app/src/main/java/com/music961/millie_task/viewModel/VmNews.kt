@@ -16,8 +16,8 @@ class VmNews @Inject constructor(
     val listNews = SnapshotStateList<ModelNews>()
 
     fun refreshListNews(){
-        val news = repoNews.getNews()
-        listNews.clearAndAddAll(news)
+        repoNews.getNews("kr","6b0d757cec51491cb228cc84666f668d"){ news->
+            listNews.clearAndAddAll(news)
+        }
     }
-
 }
