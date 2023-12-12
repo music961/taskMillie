@@ -1,6 +1,6 @@
-package com.music961.millie_task.retrofit
+package com.music961.millie_task.core.retrofit
 
-import com.music961.millie_task.model.ModelNewsCase
+import com.music961.millie_task.core.model.ModelNewsCase
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

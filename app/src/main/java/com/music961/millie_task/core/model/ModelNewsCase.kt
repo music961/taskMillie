@@ -1,7 +1,7 @@
-package com.music961.millie_task.model
+package com.music961.millie_task.core.model
 
 data class ModelNewsCase(
     val status : String,
     val totalResult : Int,
-    val articles : List<ModelNews>
+    val articles : List<EntityNews>
 )

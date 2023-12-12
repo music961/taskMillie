@@ -1,36 +1,39 @@
 package com.music961.millie_task.repo.impl
 
 import android.content.Context
-import android.widget.Toast
 import com.music961.millie_task.core.util.retrofitEnqueue
-import com.music961.millie_task.model.ModelNews
+import com.music961.millie_task.core.model.EntityNews
 import com.music961.millie_task.repo.RepoNews
-import com.music961.millie_task.retrofit.RetrofitNews
+import com.music961.millie_task.core.retrofit.RetrofitNews
+import com.music961.millie_task.core.room.NewsDataBase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RepoNewsImpl @Inject constructor(
     private val context : Context,
-    private val retrofitNews: RetrofitNews
+    private val retrofitNews: RetrofitNews,
+    private val room : NewsDataBase
 ) : RepoNews {
     override fun getNews(
         country: String,
         apiKey: String,
-        unit : (List<ModelNews>)->Unit
+        unit : (List<EntityNews>)->Unit
     ) {
         retrofitNews.getNews( country, apiKey ).retrofitEnqueue(
             {
-                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
                 unit(it.articles)
+                CoroutineScope(Dispatchers.IO).launch {
+                    room.newsDao().clearEntityNews()
+                    room.newsDao().insertGetNews(it.articles)
+                }
             },
             {
-                Toast.makeText(context, "실패", Toast.LENGTH_SHORT).show()
-                unit(getNewsFromLocal())
+                CoroutineScope(Dispatchers.IO).launch {
+                    unit(room.newsDao().getEntityNews())
+                }
             }
         )
-    }
-
-    private fun getNewsFromLocal() : List<ModelNews>{
-        // TODO : room 을 통한 데이터 획득
-        return emptyList()
     }
 }

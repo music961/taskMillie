@@ -59,8 +59,8 @@ fun UIMain() {
                         .padding(MillieDp.ItemPadding.dp)
                 ) {
                     Text(text = it.title)
-                    Text(text = it.urlToImage)
-                    Text(text = it.publishedAt)
+                    Text(text = it.urlToImage ?:"")
+                    Text(text = it.publishedAt ?:"")
                 }
             }
         }

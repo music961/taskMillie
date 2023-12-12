@@ -1,4 +1,4 @@
-package com.music961.millie_task.other
+package com.music961.millie_task.core.util
 
 import androidx.compose.runtime.snapshots.SnapshotStateList
 
