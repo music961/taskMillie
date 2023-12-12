@@ -1,4 +1,4 @@
-package com.music961.millie_task.ui.theme
+package com.music961.millie_task.compose.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

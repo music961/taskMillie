@@ -69,7 +69,13 @@ dependencies {
     implementation ("androidx.room:room-ktx:2.6.1")
     kapt ("androidx.room:room-compiler:2.6.1")
 
-    // Coil : 이미지 처리 라이브러리
+    // REST
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.okhttp3:okhttp:5.0.0-alpha.11")
+    implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11")
+
+    // Coil
     implementation ("io.coil-kt:coil-compose:2.5.0")
 
     testImplementation("junit:junit:4.13.2")

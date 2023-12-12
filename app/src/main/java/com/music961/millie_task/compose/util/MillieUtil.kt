@@ -1,4 +1,4 @@
-package com.music961.millie_task.ui.util
+package com.music961.millie_task.compose.util
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
