@@ -4,6 +4,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 enum class MillieDp(val dp : Dp) {
-    ItemPadding(8.dp),
-    ScaffoldPadding(14.dp),
+    PaddingItemAroundPadding(8.dp),
+    PaddingItemVerticalSpace(5.dp),
+    PaddingScaffold(14.dp),
 }

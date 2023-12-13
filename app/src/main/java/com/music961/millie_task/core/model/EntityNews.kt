@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class EntityNews(
     @PrimaryKey
     val title : String,
+    val url : String?,
     val urlToImage : String?,
     val publishedAt : String?
 )

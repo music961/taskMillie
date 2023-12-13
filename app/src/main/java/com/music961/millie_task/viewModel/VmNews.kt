@@ -16,7 +16,10 @@ class VmNews @Inject constructor(
     val listNews = SnapshotStateList<EntityNews>()
 
     fun refreshListNews(){
-        repoNews.getNews("kr","6b0d757cec51491cb228cc84666f668d"){ news->
+        repoNews.getNews(
+            country = "kr",
+            apiKey = "6b0d757cec51491cb228cc84666f668d"
+        ){ news->
             listNews.clearAndAddAll(news)
         }
     }

@@ -24,6 +24,7 @@ class RepoNewsImpl @Inject constructor(
         retrofitNews.getNews( country, apiKey ).retrofitEnqueue(
             {
                 unit(it.articles)
+                // 231213 Andy : keep news to local by room
                 CoroutineScope(Dispatchers.IO).launch {
                     room.newsDao().clearEntityNews()
                     room.newsDao().insertGetNews(it.articles)
