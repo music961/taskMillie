@@ -1,6 +1,7 @@
 package com.music961.millie_task.compose
 
 import androidx.activity.ComponentActivity
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -10,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.music961.millie_task.core.enum.NavStage
 import com.music961.millie_task.viewModel.VmNews
 
+@ExperimentalMaterial3Api
 @Composable
 fun Navi(){
 
