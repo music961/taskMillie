@@ -6,6 +6,9 @@ import com.music961.millie_task.core.model.EntityNews
 import com.music961.millie_task.core.util.clearAndAddAll
 import com.music961.millie_task.repo.RepoNews
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -15,6 +18,9 @@ class VmNews @Inject constructor(
 
     val listNews = SnapshotStateList<EntityNews>()
 
+    // 231213 Andy : url fo WebView
+    private val _urlForWebView = MutableStateFlow("")
+    val urlForWebView = _urlForWebView.asStateFlow()
     fun refreshListNews(){
         repoNews.getNews(
             country = "kr",
@@ -22,5 +28,9 @@ class VmNews @Inject constructor(
         ){ news->
             listNews.clearAndAddAll(news)
         }
+    }
+
+    fun setNewsUrl(url : String){
+        _urlForWebView.update { url }
     }
 }

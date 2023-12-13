@@ -1,5 +1,6 @@
 package com.music961.millie_task.compose
 
+import android.content.Context
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
@@ -18,20 +19,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.music961.millie_task.compose.theme.MillieTheme
 import com.music961.millie_task.compose.util.MillieScaffold
 import com.music961.millie_task.compose.util.preventDupClick
 import com.music961.millie_task.core.enum.MillieDp
+import com.music961.millie_task.core.enum.NavStage
 import com.music961.millie_task.viewModel.VmNews
 
 @Composable
-fun UIMain() {
+fun UIMain(
+    context : Context,
+    navCon : NavController,
+    vmNews: VmNews
+) {
 
-    val context = LocalContext.current as ComponentActivity
-    val vmNews = hiltViewModel<VmNews>(context)
     val listNews = vmNews.listNews
 
     // 231208 Andy : true if 600dp or higher
@@ -59,9 +62,14 @@ fun UIMain() {
                         .background(Color((0..Int.MAX_VALUE).random()))
                         .padding(MillieDp.PaddingItemAroundPadding.dp)
                         .preventDupClick {
-                            Toast
-                                .makeText(context, it.url, Toast.LENGTH_SHORT)
-                                .show()
+                            if (it.url.isNullOrBlank()) {
+                                Toast
+                                    .makeText(context, "링크가 없습니다.", Toast.LENGTH_SHORT)
+                                    .show()
+                            } else {
+                                vmNews.setNewsUrl(it.url)
+                                NavStage.WebView.movePage(navCon)
+                            }
                         },
                     verticalArrangement = Arrangement.spacedBy(MillieDp.PaddingItemVerticalSpace.dp)
                 ) {
@@ -75,13 +83,5 @@ fun UIMain() {
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun UIMainPreview() {
-    MillieTheme {
-        UIMain()
     }
 }
