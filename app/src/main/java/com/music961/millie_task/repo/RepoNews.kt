@@ -8,4 +8,11 @@ interface RepoNews {
         apiKey: String,
         unit : (List<EntityNews>)->Unit
     )
+
+    suspend fun keepNewsViewed(title : String)
+
+    suspend fun haveNewsViewed(title: String) : Boolean
+
+    suspend fun clearViewedHistory()
+
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Task : Millie</string>
+
+    <string name="news_api_key">6b0d757cec51491cb228cc84666f668d</string>
 </resources>

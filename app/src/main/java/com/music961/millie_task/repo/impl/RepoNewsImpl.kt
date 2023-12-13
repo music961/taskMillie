@@ -3,11 +3,13 @@ package com.music961.millie_task.repo.impl
 import android.content.Context
 import com.music961.millie_task.core.util.retrofitEnqueue
 import com.music961.millie_task.core.model.EntityNews
+import com.music961.millie_task.core.model.EntityNewsViewed
 import com.music961.millie_task.repo.RepoNews
 import com.music961.millie_task.core.retrofit.RetrofitNews
 import com.music961.millie_task.core.room.NewsDataBase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,4 +39,16 @@ class RepoNewsImpl @Inject constructor(
             }
         )
     }
+
+    override suspend fun keepNewsViewed(title: String) {
+        room.newsDao().insertViewedNewsTitle(EntityNewsViewed(title))
+    }
+
+    override suspend fun haveNewsViewed(title: String) =
+        room.newsDao().haveViewedNews(title)
+
+    override suspend fun clearViewedHistory() {
+        room.newsDao().clearEntityNewsViewed()
+    }
+
 }
