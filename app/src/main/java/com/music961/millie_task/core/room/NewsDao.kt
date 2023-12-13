@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.music961.millie_task.core.model.EntityNews
 import com.music961.millie_task.core.model.EntityNewsViewed
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NewsDao {
@@ -26,4 +27,7 @@ interface NewsDao {
 
     @Query("delete from EntityNewsViewed")
     fun clearEntityNewsViewed()
+
+    @Query("select * from EntityNewsViewed where title in (:titles)")
+    fun getFlowNewsViewed(titles: List<String>) : Flow<List<EntityNewsViewed>>
 }

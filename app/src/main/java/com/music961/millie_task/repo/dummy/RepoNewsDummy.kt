@@ -1,5 +1,6 @@
 package com.music961.millie_task.repo.dummy
 
+import android.util.Log
 import com.music961.millie_task.core.model.EntityNews
 import com.music961.millie_task.repo.RepoNews
 
@@ -37,5 +38,18 @@ class RepoNewsDummy : RepoNews {
                 )
             )
         )
+    }
+
+    override suspend fun keepNewsViewed(title: String) {
+        Log.d("Millie", "keep news viewed")
+    }
+
+    override suspend fun haveNewsViewed(title: String): Boolean {
+        Log.d("Millie", "check have news viewed")
+        return false
+    }
+
+    override suspend fun clearViewedHistory() {
+        Log.d("Millie", "clear news viewed history")
     }
 }
