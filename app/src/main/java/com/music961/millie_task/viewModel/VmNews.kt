@@ -3,6 +3,7 @@ package com.music961.millie_task.viewModel
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.music961.millie_task.core.enum.Country
 import com.music961.millie_task.core.model.EntityNews
 import com.music961.millie_task.core.util.clearAndAddAll
 import com.music961.millie_task.repo.RepoNews
@@ -25,10 +26,14 @@ class VmNews @Inject constructor(
     private val _urlForWebView = MutableStateFlow("")
     val urlForWebView = _urlForWebView.asStateFlow()
 
-    fun refreshListNews(unit: () -> Unit){
+    fun refreshListNews(
+        country : Country,
+        apiKey : String,
+        unit: () -> Unit
+    ){
         repoNews.getNews(
-            country = "us",
-            apiKey = "6b0d757cec51491cb228cc84666f668d"
+            country = country.name,
+            apiKey = apiKey
         ){ news->
             listNews.clearAndAddAll(news)
             unit()
